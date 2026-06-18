@@ -13,9 +13,32 @@ export const DEFAULT_GROUP_COLUMNS = [
   'CÓDIGO MATERIAL'
 ];
 
+export const SECTIONING_DESCRIPTION_VALUES = [
+  'SEC'
+];
+
+export const MACHINING_DESCRIPTION_VALUES = [
+  'USI'
+];
+
+export const GLUE_DESCRIPTION_VALUES = [
+  'Puxador_45'
+];
+
 export const EDGE_COLUMNS = [
   'BORDA FACE TRASEIRA ESPESSURA-COR',
   'BORDA FACE FRENTE ESPESSURA-COR',
   'BORDA FACE LE ESPESSURA-COR',
   'BORDA FCE LD ESPESSURA-COR'
+];
+
+export const GLUE_EDGE_VALUES = [
+  'COLAR'
+];
+
+export const MACHINING_EDGE_VALUES = [
+  '4023',
+  '4030',
+  'RM416',
+  'RM_416'
 ];

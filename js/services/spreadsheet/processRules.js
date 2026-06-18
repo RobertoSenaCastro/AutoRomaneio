@@ -1,0 +1,74 @@
+import {
+  GLUE_EDGE_VALUES,
+  MACHINING_EDGE_VALUES,
+  MACHINING_DESCRIPTION_VALUES,
+  SECTIONING_DESCRIPTION_VALUES
+} from '../../config.js';
+
+export function buildProcessColumn(row, options) {
+  const {
+    pieceDescriptionIndex,
+    processColumnIndex,
+    edgeColumnIndexes
+  } = options;
+
+  const newRow = [...row, ''];
+  const processValues = [];
+  const description = String(row[pieceDescriptionIndex] ?? '');
+  const descriptionUpper = description.toUpperCase();
+
+  getGlueProcessesFromEdgeColumns(row, edgeColumnIndexes)
+    .forEach(value => processValues.push(value));
+
+  const hasMachiningInDescription = MACHINING_DESCRIPTION_VALUES.some(value =>
+    descriptionUpper.includes(value.toUpperCase())
+  );
+
+  const hasSectioning = SECTIONING_DESCRIPTION_VALUES.some(value =>
+    descriptionUpper.includes(value.toUpperCase())
+  );
+
+  const hasMachiningEdge = hasMachiningCodeInEdgeColumns(row, edgeColumnIndexes);
+
+  if (hasSectioning) {
+    processValues.push('SECCIONADA');
+  }
+
+  if (hasMachiningInDescription || hasMachiningEdge) {
+    processValues.push('USINAGEM');
+  }
+
+  if (processValues.length > 0) {
+    newRow[processColumnIndex] = processValues.join(' / ');
+  }
+
+  return newRow;
+}
+
+function getGlueProcessesFromEdgeColumns(row, edgeColumnIndexes) {
+  const processes = [];
+
+  edgeColumnIndexes.forEach(columnIndex => {
+    const value = String(row[columnIndex] ?? '').trim();
+
+    if (GLUE_EDGE_VALUES.some(glueValue =>
+      value.toUpperCase().includes(glueValue.toUpperCase())
+    )) {
+      processes.push(value);
+    }
+  });
+
+  return processes;
+}
+
+function hasMachiningCodeInEdgeColumns(row, edgeColumnIndexes) {
+  return edgeColumnIndexes.some(columnIndex => {
+    const value = String(row[columnIndex] ?? '')
+      .toUpperCase()
+      .replace(/\s+/g, '');
+
+    return MACHINING_EDGE_VALUES.some(code =>
+      value.includes(code.toUpperCase())
+    );
+  });
+}

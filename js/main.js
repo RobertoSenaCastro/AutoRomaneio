@@ -95,11 +95,20 @@ function runProcessing() {
     }))
     .filter(result => result.rows.length > 0);
 
+  const handleResults = state.results
+  .map(result => ({
+    name: result.name.replace(/\.xlsx?$/i, ' Puxadores.xlsx'),
+    headers: result.headers,
+    rows: result.handleRows ?? []
+  }))
+  .filter(result => result.rows.length > 0);
+
   state.results = [
     ...state.results,
     ...repeatedResults,
     ...machiningResults,
-    ...sectionedResults
+    ...sectionedResults,
+    ...handleResults
   ];
 
   renderResults(state.results);
