@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processador de Planilha .xls</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Processador de Planilha</h1>
+    <p>xls → apagar colunas · agrupar · injetar linhas → zip</p>
+  </header>
+
+  <!-- Passo 1: Carregar -->
+  <div class="card" id="s1">
+    <div class="step-row">
+      <div class="step-num" id="n1">1</div>
+      <div class="step-body">
+        <div class="step-title">Carregar planilhas</div>
+        <div class="step-desc">Selecione ou arraste um ou mais arquivos .xls ao mesmo tempo.</div>
+        <div class="upload-zone" id="dz">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9M15 21V9"/>
+          </svg>
+          <p>Clique para selecionar ou arraste aqui</p>
+          <p class="filename" id="fname"></p>
+        </div>
+        <input type="file" id="fi" accept=".xls,.xlsx" multiple style="display:none">
+        <div id="file-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 2: Remover colunas -->
+  <div class="card off" id="s2">
+    <div class="step-row">
+      <div class="step-num" id="n2">2</div>
+      <div class="step-body">
+        <div class="step-title">Apagar colunas indesejadas</div>
+        <div class="step-desc">Configuração aplicada a todos os arquivos. Clique nas colunas que deseja remover. Vermelhas = serão apagadas.</div>
+        <div class="tag-list" id="col-tags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 3: Agrupar -->
+  <div class="card off" id="s3">
+    <div class="step-row">
+      <div class="step-num" id="n3">3</div>
+      <div class="step-body">
+        <div class="step-title">Agrupar por código</div>
+        <div class="step-desc">Adicione uma ou mais colunas de agrupamento. Aplicado a todos os arquivos.</div>
+        <div class="inj-row">
+          <select id="gcol">
+            <option value="">— selecione uma coluna —</option>
+          </select>
+          <button class="btn-add" id="add-group-btn">+ Adicionar</button>
+        </div>
+        <div id="gcol-list"></div>
+        <div id="preview-info"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 4: Injetar linhas -->
+  <!--
+  <div class="card off" id="s4">
+    <div class="step-row">
+      <div class="step-num" id="n4">4</div>
+      <div class="step-body">
+        <div class="step-title">Injetar linhas por código</div>
+        <div class="step-desc">Informe o código e os valores (separados por vírgula) que serão inseridos após o grupo desse código. Aplicado a todos os arquivos.</div>
+        <div class="inj-row">
+          <input type="text" id="icode" placeholder="Código">
+          <input type="text" id="ivals" placeholder="val1, val2, val3…">
+          <button class="btn-add" onclick="addInj()">+ Adicionar</button>
+        </div>
+        <div id="ilist"></div>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <button class="btn-run" id="run-btn" disabled>▶ Processar planilhas</button>
+
+  <!-- Resultado -->
+  <div class="card" id="res-card" style="display:none">
+    <div class="stats-row" id="stats"></div>
+    <div id="tab-bar"></div>
+    <div class="table-wrap"><table id="rtable"></table></div>
+    <div class="dl-row">
+      <button class="btn-dl" id="download-btn">⬇ Baixar resultado</button>
+    </div>
+    <div class="legend">Verde = cabeçalho de grupo &nbsp;·&nbsp; Laranja = linha injetada</div>
+  </div>
+
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

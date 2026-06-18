@@ -1,0 +1,20 @@
+export const dom = {
+  fileInput: document.getElementById('fi'),
+  dropZone: document.getElementById('dz'),
+  fileName: document.getElementById('fname'),
+  fileList: document.getElementById('file-list'),
+  columnTags: document.getElementById('col-tags'),
+  groupSelect: document.getElementById('gcol'),
+  groupList: document.getElementById('gcol-list'),
+  previewInfo: document.getElementById('preview-info'),
+  runButton: document.getElementById('run-btn'),
+  resultCard: document.getElementById('res-card'),
+  stats: document.getElementById('stats'),
+  tabBar: document.getElementById('tab-bar'),
+  resultTable: document.getElementById('rtable'),
+  step1Number: document.getElementById('n1'),
+  step2Number: document.getElementById('n2'),
+  step3Number: document.getElementById('n3'),
+  step2: document.getElementById('s2'),
+  step3: document.getElementById('s3')
+};
