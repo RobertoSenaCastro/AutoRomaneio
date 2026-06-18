@@ -22,7 +22,7 @@ export const MACHINING_DESCRIPTION_VALUES = [
 ];
 
 export const GLUE_DESCRIPTION_VALUES = [
-  'Puxador_45'
+  'PUXADOR_45'
 ];
 
 export const EDGE_COLUMNS = [

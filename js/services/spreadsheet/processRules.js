@@ -1,5 +1,6 @@
 import {
   GLUE_EDGE_VALUES,
+  GLUE_DESCRIPTION_VALUES,
   MACHINING_EDGE_VALUES,
   MACHINING_DESCRIPTION_VALUES,
   SECTIONING_DESCRIPTION_VALUES
@@ -20,6 +21,10 @@ export function buildProcessColumn(row, options) {
   getGlueProcessesFromEdgeColumns(row, edgeColumnIndexes)
     .forEach(value => processValues.push(value));
 
+  const hasGlueInDescription = GLUE_DESCRIPTION_VALUES.some(value =>
+    descriptionUpper.includes(value.toUpperCase())
+  );
+
   const hasMachiningInDescription = MACHINING_DESCRIPTION_VALUES.some(value =>
     descriptionUpper.includes(value.toUpperCase())
   );
@@ -30,6 +35,10 @@ export function buildProcessColumn(row, options) {
 
   const hasMachiningEdge = hasMachiningCodeInEdgeColumns(row, edgeColumnIndexes);
 
+  if (hasGlueInDescription) {
+    processValues.push('COLAR');
+  }
+  
   if (hasSectioning) {
     processValues.push('SECCIONADA');
   }
