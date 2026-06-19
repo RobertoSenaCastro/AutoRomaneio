@@ -13,6 +13,7 @@ import {
 import { refreshColumnsUI, setColumnChangedHandler } from './ui/columnsUI.js';
 import { applyDefaultGroupColumns, refreshGroupsUI, addGroupColumn, previewGroups } from './ui/groupsUI.js';
 import { renderResults } from './ui/resultsUI.js';
+import { APP_VERSION } from './config.js';
 
 setColumnChangedHandler(previewGroups);
 
@@ -158,3 +159,5 @@ async function loadMaterialCatalog() {
 
 await loadMaterialCatalog();
 setupEvents();
+document.getElementById('app-version').textContent =
+  `AutoRomaneio v${APP_VERSION}`;
