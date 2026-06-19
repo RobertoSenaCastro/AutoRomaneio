@@ -50,7 +50,8 @@ export function processFile(file, options) {
     repeatedRows: getProcessRows(finalHeaders, finalRows, 'COLAR'),
     machiningRows: getProcessRows(finalHeaders, finalRows, 'USINAGEM'),
     sectionedRows: getProcessRows(finalHeaders, finalRows, 'SECCIONADA'),
-    handleRows: getDescriptionRows(finalHeaders, finalRows, "PUX")
+    handleRows: getDescriptionRows(finalHeaders, finalRows, "PUX"),
+    edgebander45Rows: getProcessRows(finalHeaders, finalRows,"COLADEIRA_45")
   };
 }
 

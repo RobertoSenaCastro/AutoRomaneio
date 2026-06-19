@@ -13,6 +13,10 @@ export const DEFAULT_GROUP_COLUMNS = [
   'CÓDIGO MATERIAL'
 ];
 
+export const EDGEBANDER45_DESCRIPTION_VALUES = [
+  'PUXADOR_45'
+];
+
 export const SECTIONING_DESCRIPTION_VALUES = [
   'SEC'
 ];
@@ -22,7 +26,7 @@ export const MACHINING_DESCRIPTION_VALUES = [
 ];
 
 export const GLUE_DESCRIPTION_VALUES = [
-  'PUXADOR_45'
+  
 ];
 
 export const EDGE_COLUMNS = [

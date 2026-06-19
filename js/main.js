@@ -96,19 +96,28 @@ function runProcessing() {
     .filter(result => result.rows.length > 0);
 
   const handleResults = state.results
-  .map(result => ({
-    name: result.name.replace(/\.xlsx?$/i, ' Puxadores.xlsx'),
-    headers: result.headers,
-    rows: result.handleRows ?? []
-  }))
-  .filter(result => result.rows.length > 0);
+    .map(result => ({
+      name: result.name.replace(/\.xlsx?$/i, ' Puxadores.xlsx'),
+      headers: result.headers,
+      rows: result.handleRows ?? []
+    }))
+    .filter(result => result.rows.length > 0);
+
+  const edgebander45Results = state.results
+    .map(result => ({
+      name: result.name.replace(/\.xlsx?$/i, ' Coladeira.xlsx'),
+      headers: result.headers,
+      rows: result.edgebander45Rows ?? []
+    }))
+    .filter(result => result.rows.length > 0);
 
   state.results = [
     ...state.results,
     ...repeatedResults,
     ...machiningResults,
     ...sectionedResults,
-    ...handleResults
+    ...handleResults,
+    ...edgebander45Results
   ];
 
   renderResults(state.results);

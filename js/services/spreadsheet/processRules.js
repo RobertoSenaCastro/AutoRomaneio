@@ -3,7 +3,8 @@ import {
   GLUE_DESCRIPTION_VALUES,
   MACHINING_EDGE_VALUES,
   MACHINING_DESCRIPTION_VALUES,
-  SECTIONING_DESCRIPTION_VALUES
+  SECTIONING_DESCRIPTION_VALUES,
+  EDGEBANDER45_DESCRIPTION_VALUES
 } from '../../config.js';
 
 export function buildProcessColumn(row, options) {
@@ -18,8 +19,14 @@ export function buildProcessColumn(row, options) {
   const description = String(row[pieceDescriptionIndex] ?? '');
   const descriptionUpper = description.toUpperCase();
 
+
   getGlueProcessesFromEdgeColumns(row, edgeColumnIndexes)
     .forEach(value => processValues.push(value));
+
+  const hasEdgebander45InDescription =
+    EDGEBANDER45_DESCRIPTION_VALUES.some(value =>
+      descriptionUpper.includes(value.toUpperCase())
+    );
 
   const hasGlueInDescription = GLUE_DESCRIPTION_VALUES.some(value =>
     descriptionUpper.includes(value.toUpperCase())
@@ -35,10 +42,14 @@ export function buildProcessColumn(row, options) {
 
   const hasMachiningEdge = hasMachiningCodeInEdgeColumns(row, edgeColumnIndexes);
 
+  if (hasEdgebander45InDescription) {
+    processValues.push('COLADEIRA_45');
+  }
+
   if (hasGlueInDescription) {
     processValues.push('COLAR');
   }
-  
+
   if (hasSectioning) {
     processValues.push('SECCIONADA');
   }
