@@ -191,9 +191,12 @@ tr.inj td { background: var(--amber-light); color: var(--amber-text); }
 .tab-btn.active { background: var(--green-light); color: var(--green-text); border-color: #5DCAA5; font-weight: bold; }
 
 #app-version {
+  width: 100%;
   text-align: center;
-  margin-top: 12px;
+
+  margin-top: 10px;
+
+  font-size: 12px;
   color: #666;
-  font-size: 11px;
   font-family: monospace;
 }

@@ -47,4 +47,4 @@ export const MACHINING_EDGE_VALUES = [
   'RM_416'
 ];
 
-export const APP_VERSION = '1.4.0';
+export const APP_VERSION = '1.4.2';
