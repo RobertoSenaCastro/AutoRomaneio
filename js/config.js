@@ -14,7 +14,8 @@ export const DEFAULT_GROUP_COLUMNS = [
 ];
 
 export const EDGEBANDER45_DESCRIPTION_VALUES = [
-  'PUXADOR_45'
+  'PUXADOR_45',
+  'GAVETA_45'
 ];
 
 export const SECTIONING_DESCRIPTION_VALUES = [
@@ -22,7 +23,8 @@ export const SECTIONING_DESCRIPTION_VALUES = [
 ];
 
 export const MACHINING_DESCRIPTION_VALUES = [
-  'USI'
+  'USI',
+  'PUX_4023'
 ];
 
 export const GLUE_DESCRIPTION_VALUES = [
@@ -47,4 +49,8 @@ export const MACHINING_EDGE_VALUES = [
   'RM_416'
 ];
 
-export const APP_VERSION = '1.4.2';
+export const EDGEBANDER45_EDGE_VALUES = [
+  '45_COLADEIRA'
+];
+
+export const APP_VERSION = '1.4.3';

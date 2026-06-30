@@ -4,7 +4,8 @@ import {
   MACHINING_EDGE_VALUES,
   MACHINING_DESCRIPTION_VALUES,
   SECTIONING_DESCRIPTION_VALUES,
-  EDGEBANDER45_DESCRIPTION_VALUES
+  EDGEBANDER45_DESCRIPTION_VALUES,
+  EDGEBANDER45_EDGE_VALUES
 } from '../../config.js';
 
 export function buildProcessColumn(row, options) {
@@ -28,6 +29,9 @@ export function buildProcessColumn(row, options) {
       descriptionUpper.includes(value.toUpperCase())
     );
 
+  const hasEdgebander45InEdge =
+    hasEdgebander45InEdgeColumns(row, edgeColumnIndexes);
+
   const hasGlueInDescription = GLUE_DESCRIPTION_VALUES.some(value =>
     descriptionUpper.includes(value.toUpperCase())
   );
@@ -42,7 +46,7 @@ export function buildProcessColumn(row, options) {
 
   const hasMachiningEdge = hasMachiningCodeInEdgeColumns(row, edgeColumnIndexes);
 
-  if (hasEdgebander45InDescription) {
+  if (hasEdgebander45InDescription || hasEdgebander45InEdge) {
     processValues.push('COLADEIRA_45');
   }
 
@@ -83,11 +87,28 @@ function getGlueProcessesFromEdgeColumns(row, edgeColumnIndexes) {
 
 function hasMachiningCodeInEdgeColumns(row, edgeColumnIndexes) {
   return edgeColumnIndexes.some(columnIndex => {
+    const value = normalizeProcessText(row[columnIndex]);
+
+    return MACHINING_EDGE_VALUES.some(code => {
+      const normalizedCode = normalizeProcessText(code);
+      return value.includes(normalizedCode);
+    });
+  });
+}
+
+function normalizeProcessText(value) {
+  return String(value ?? '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, '');
+}
+
+function hasEdgebander45InEdgeColumns(row, edgeColumnIndexes) {
+  return edgeColumnIndexes.some(columnIndex => {
     const value = String(row[columnIndex] ?? '')
       .toUpperCase()
       .replace(/\s+/g, '');
 
-    return MACHINING_EDGE_VALUES.some(code =>
+    return EDGEBANDER45_EDGE_VALUES.some(code =>
       value.includes(code.toUpperCase())
     );
   });
